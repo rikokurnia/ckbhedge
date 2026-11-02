@@ -10,4 +10,4 @@
 - Portfolio and Channels currently contain starter views only. Their full implementation is outside Agent 1 scope.
 - All interactions must remain explicitly demo only. No signing, RPC, or real funds. USDC integration is unverified.
 - Trade has local component state only; fixtures are initial demo snapshots, not a synchronized store.
-- Logo assets: authentic CKB and USDC marks downloaded from Trust Wallet's asset registry (see public/tokens/SOURCES.md). Text fallback on load failure.
+- Logo assets: the supplied CKB mark and the USDC mark from Trust Wallet's asset registry (see public/tokens/SOURCES.md). Text fallback on load failure.

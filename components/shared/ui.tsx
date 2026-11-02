@@ -39,14 +39,15 @@ export function TokenLogo({ token }: { token: TokenSymbol }) {
   return failed ? (
     <span className="token-fallback">{token}</span>
   ) : (
-    <img
-      src={`/tokens/${token.toLowerCase()}.png`}
-      width="36"
-      height="36"
-      className="token-logo"
-      alt={`${token} logo`}
-      onError={() => setFailed(true)}
-    />
+    <span className={`token-logo ${token === "CKB" ? "ckb-token-logo" : ""}`}>
+      <img
+        src={token === "CKB" ? "/tokens/ckb-logo.png" : "/tokens/usdc.png"}
+        width="36"
+        height="36"
+        alt={`${token} logo`}
+        onError={() => setFailed(true)}
+      />
+    </span>
   );
 }
 export function TokenRow({

@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
-import styles from './portfolio.module.css';
-import { type PortfolioAsset } from './types';
-import { formatAmount } from '@/lib/demo';
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import styles from "./portfolio.module.css";
+import { type PortfolioAsset } from "./types";
+import { formatAmount } from "@/lib/demo";
+import { TokenLogo } from "@/components/shared/ui";
 
 interface AssetsCardProps {
   assets: PortfolioAsset[];
@@ -12,8 +13,12 @@ interface AssetsCardProps {
   usdcPercent: number;
 }
 
-export function AssetsCard({ assets, ckbPercent, usdcPercent }: AssetsCardProps) {
-  const hasAssets = assets.some(a => a.channelBalance > 0);
+export function AssetsCard({
+  assets,
+  ckbPercent,
+  usdcPercent,
+}: AssetsCardProps) {
+  const hasAssets = assets.some((a) => a.channelBalance > 0);
 
   return (
     <div className={styles.assetsCard}>
@@ -23,9 +28,13 @@ export function AssetsCard({ assets, ckbPercent, usdcPercent }: AssetsCardProps)
         <div className={styles.emptyStateContainer}>
           <p className={styles.emptyStateTitle}>No channel assets found</p>
           <p className={styles.emptyStateText}>
-            Your Fiber payment channel does not currently hold CKB or USDC. Fund your channel to enable sub-second swaps and downside protection.
+            Your Fiber payment channel does not currently hold CKB or USDC. Fund
+            your channel to enable sub-second swaps and downside protection.
           </p>
-          <Link href="/channels" className={`${styles.manageBtn} ${styles.emptyStateAction}`}>
+          <Link
+            href="/channels"
+            className={`${styles.manageBtn} ${styles.emptyStateAction}`}
+          >
             Go to Channels <ArrowUpRight size={18} style={{ marginLeft: 6 }} />
           </Link>
         </div>
@@ -42,35 +51,37 @@ export function AssetsCard({ assets, ckbPercent, usdcPercent }: AssetsCardProps)
                 </tr>
               </thead>
               <tbody>
-                {assets.map(asset => (
+                {assets.map((asset) => (
                   <tr key={asset.token} className={styles.assetRow}>
                     <td className={styles.assetCell}>
                       <div className={styles.assetInfo}>
-                        <img
-                          src={`/tokens/${asset.token.toLowerCase()}.png`}
-                          alt={`${asset.name} logo`}
-                          className={`${styles.tokenLogo} ${
-                            asset.token === 'CKB' ? styles.tokenLogoCkb : ''
-                          }`}
-                          onError={(e) => {
-                            (e.currentTarget as HTMLElement).style.display = 'none';
-                          }}
-                        />
+                        <TokenLogo token={asset.token} />
                         <div className={styles.tokenNames}>
-                          <span className={styles.tokenFullName}>{asset.name}</span>
-                          <span className={styles.tokenSymbol}>{asset.token}</span>
+                          <span className={styles.tokenFullName}>
+                            {asset.name}
+                          </span>
+                          <span className={styles.tokenSymbol}>
+                            {asset.token}
+                          </span>
                         </div>
                       </div>
                     </td>
                     <td className={styles.assetCell}>
-                      {formatAmount(asset.channelBalance, asset.token === 'USDC' ? 0 : 0)} {asset.token}
+                      {formatAmount(
+                        asset.channelBalance,
+                        asset.token === "USDC" ? 0 : 0,
+                      )}{" "}
+                      {asset.token}
                     </td>
                     <td className={styles.assetCell}>
-                      ${asset.referencePrice >= 1
+                      $
+                      {asset.referencePrice >= 1
                         ? formatAmount(asset.referencePrice, 2)
                         : asset.referencePrice.toFixed(5)}
                     </td>
-                    <td className={`${styles.assetCell} ${styles.assetCellBold}`}>
+                    <td
+                      className={`${styles.assetCell} ${styles.assetCellBold}`}
+                    >
                       ${formatAmount(asset.estUsdValue, 2)}
                     </td>
                   </tr>
