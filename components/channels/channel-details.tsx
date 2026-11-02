@@ -12,14 +12,25 @@ interface ChannelDetailsProps {
 export function ChannelDetails({ channel }: ChannelDetailsProps) {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
-  const handleCopy = (key: string, value: string) => {
-    navigator.clipboard.writeText(value);
-    setCopiedKey(key);
-    setTimeout(() => setCopiedKey(null), 2000);
+  const [copyError, setCopyError] = useState(false);
+  const handleCopy = async (key: string, value: string) => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopyError(false);
+      setCopiedKey(key);
+      setTimeout(() => setCopiedKey(null), 2000);
+    } catch {
+      setCopyError(true);
+    }
   };
 
   return (
     <div className="flex flex-col gap-3 text-[13px] text-[#8ea096]">
+      {copyError && (
+        <p role="status">
+          Clipboard unavailable. Select and copy the displayed value instead.
+        </p>
+      )}
       <div className="flex items-center justify-between py-1">
         <span className="flex items-center gap-1.5 text-[#c6d6ce]">
           <Cpu size={14} className="text-[#16efaa]" />

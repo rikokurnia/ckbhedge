@@ -29,7 +29,7 @@ The shared interface includes responsive navigation, accessible dialog and tab p
 
 ### Requirements
 
-- Node.js **20.9 or newer**
+- Node.js **26.x** (see `.nvmrc`)
 - npm
 
 ### Installation
@@ -52,7 +52,7 @@ No environment variables, wallet, API keys, or local blockchain node are require
 | `npm run dev`       | Start the development server.              |
 | `npm run typecheck` | Run TypeScript checks.                     |
 | `npm run build`     | Create a production build.                 |
-| `npx next start`    | Serve the production build after building. |
+| `npm run start`     | Serve the production build after building. |
 
 ## Project structure
 
@@ -74,3 +74,7 @@ artifacts/                Trade screenshots
 ```
 
 **Stack:** Next.js App Router, React, TypeScript, Tailwind CSS v4, Radix UI primitives, and Lucide icons. The current chart is a custom SVG visualization with responsive HTML labels.
+
+## Deployment
+
+Import this repository into Vercel using the **Next.js** preset and the repository root. No environment variables are required for the frontend demo. See [DEPLOYMENT.md](DEPLOYMENT.md) for settings and verification commands.

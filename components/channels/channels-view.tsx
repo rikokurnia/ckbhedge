@@ -16,6 +16,12 @@ import {
   INITIAL_CHANNEL_HISTORY,
 } from "./types";
 
+import {
+  isChannelData,
+  isChannelHistory,
+  readStoredDemo,
+} from "@/lib/channel-storage";
+
 const STORAGE_KEY_CHANNEL = "ckbhedge_channel_data_v1";
 const STORAGE_KEY_HISTORY = "ckbhedge_channel_history_v1";
 
@@ -38,15 +44,18 @@ export function ChannelsView() {
   // Load persisted demo state on mount
   useEffect(() => {
     try {
-      const savedChannel = localStorage.getItem(STORAGE_KEY_CHANNEL);
-      if (savedChannel) {
-        setChannel(JSON.parse(savedChannel));
-      }
-
-      const savedHistory = localStorage.getItem(STORAGE_KEY_HISTORY);
-      if (savedHistory) {
-        setHistory(JSON.parse(savedHistory));
-      }
+      const savedChannel = readStoredDemo(
+        localStorage,
+        STORAGE_KEY_CHANNEL,
+        isChannelData,
+      );
+      const savedHistory = readStoredDemo(
+        localStorage,
+        STORAGE_KEY_HISTORY,
+        isChannelHistory,
+      );
+      if (savedChannel) setChannel(savedChannel);
+      if (savedHistory) setHistory(savedHistory);
     } catch {
       // Fallback to initial
     }
