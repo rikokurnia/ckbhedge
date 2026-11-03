@@ -38,7 +38,8 @@ export function SetupChannelModal({
   useEffect(() => {
     if (open) {
       setStep("input");
-      const defaultAmount = channel.walletBalance >= 50000 ? 50000 : channel.walletBalance;
+      const defaultAmount =
+        channel.walletBalance >= 50000 ? 50000 : channel.walletBalance;
       setAmountStr(String(defaultAmount));
       setPendingPhase(1);
       setErrorMessage("");
@@ -184,7 +185,7 @@ export function SetupChannelModal({
                 <div className="flex justify-between">
                   <span className="text-[#8ea096]">Peer LP Node:</span>
                   <span className="font-mono text-[11px] text-white">
-                    FNN Testnet (0x02bf…91a0)
+                    Fiber node (0x02bf…91a0)
                   </span>
                 </div>
                 <div className="flex justify-between">

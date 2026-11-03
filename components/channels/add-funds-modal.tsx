@@ -43,7 +43,9 @@ export function AddFundsModal({
   useEffect(() => {
     if (open) {
       setStep("input");
-      setAmountStr(channel.walletBalance >= 5000 ? "5000" : String(channel.walletBalance));
+      setAmountStr(
+        channel.walletBalance >= 5000 ? "5000" : String(channel.walletBalance),
+      );
       setErrorMessage("");
       setPendingPhase(1);
     }
@@ -143,7 +145,7 @@ export function AddFundsModal({
                 {step === "input" && "Add funds to Fiber"}
               </DialogPrimitive.Title>
               <DialogPrimitive.Description className="text-[13px] text-[#8ea096] mt-0.5">
-                Demo simulation · CKB Pudge Testnet
+                Channel funding
               </DialogPrimitive.Description>
             </div>
             <DialogPrimitive.Close
@@ -241,22 +243,6 @@ export function AddFundsModal({
                     +{formatAmount(inc)}
                   </button>
                 ))}
-              </div>
-
-              {/* Test mode toggle for failure simulation */}
-              <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#0c1612]/60 border border-[#23352d]/60 text-[12px]">
-                <span className="text-[#8ea096]">Simulate failure state:</span>
-                <button
-                  type="button"
-                  onClick={() => setSimulateFailure(!simulateFailure)}
-                  className={`px-2 py-0.5 rounded text-[11px] font-semibold cursor-pointer border transition-colors ${
-                    simulateFailure
-                      ? "bg-[#ff505a]/20 text-[#ff505a] border-[#ff505a]/40"
-                      : "bg-transparent text-[#8ea096] border-[#23352d]"
-                  }`}
-                >
-                  {simulateFailure ? "Failure ON" : "Off (Normal)"}
-                </button>
               </div>
 
               {/* Proceed to Review Button */}
@@ -494,8 +480,8 @@ export function AddFundsModal({
                   Funding transaction failed
                 </h4>
                 <p className="text-[13px] text-[#8ea096]">
-                  Simulated network failure on CKB L1 mempool. No funds were
-                  deducted from your wallet.
+                  Funding could not be completed. No funds were deducted from
+                  your wallet.
                 </p>
               </div>
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { SlidersHorizontal, RotateCcw } from "lucide-react";
 import { ChannelCard } from "./channel-card";
 import { UnfundedCard } from "./unfunded-card";
 import { ChannelHistory } from "./channel-history";
@@ -37,9 +36,6 @@ export function ChannelsView() {
   const [closeChannelOpen, setCloseChannelOpen] = useState<boolean>(false);
   const [setupChannelOpen, setSetupChannelOpen] = useState<boolean>(false);
   const [faucetOpen, setFaucetOpen] = useState<boolean>(false);
-
-  // Demo testing bar visibility
-  const [showDemoToolbar, setShowDemoToolbar] = useState<boolean>(false);
 
   // Load persisted demo state on mount
   useEffect(() => {
@@ -160,33 +156,6 @@ export function ChannelsView() {
     }));
   };
 
-  // Demo quick switchers
-  const handleResetDefault = () => {
-    setChannel(INITIAL_CHANNEL_DATA);
-    setHistory(INITIAL_CHANNEL_HISTORY);
-    try {
-      localStorage.removeItem(STORAGE_KEY_CHANNEL);
-      localStorage.removeItem(STORAGE_KEY_HISTORY);
-    } catch {
-      // Ignore
-    }
-  };
-
-  const handleToggleUsdc = () => {
-    setChannel((prev) => ({
-      ...prev,
-      usdcBalance: prev.usdcBalance > 0 ? 0 : 250,
-    }));
-  };
-
-  const handleToggleState = () => {
-    if (channel.state === "active") {
-      handleCloseChannelSuccess();
-    } else {
-      handleSetupChannelSuccess(50000);
-    }
-  };
-
   return (
     <div className="w-full min-h-[calc(100vh-180px)] flex flex-col items-center justify-start py-8 md:py-14 px-4 relative">
       {/* Main Channel Card (Active or Unfunded) */}
@@ -207,58 +176,6 @@ export function ChannelsView() {
 
       {/* History section below card */}
       <ChannelHistory history={history} />
-
-      {/* Discreet Demo Testing Toolbar (For grading & state verification) */}
-      <div className="mt-12 flex flex-col items-center">
-        <button
-          type="button"
-          onClick={() => setShowDemoToolbar(!showDemoToolbar)}
-          className="flex items-center gap-1.5 text-[11px] text-[#71857b] hover:text-[#16efaa] transition-colors py-1 px-3 rounded-full bg-[#101c17]/50 border border-[#23352d]/60 cursor-pointer"
-        >
-          <SlidersHorizontal size={12} />
-          <span>Demo state controller</span>
-        </button>
-
-        {showDemoToolbar && (
-          <div className="mt-3 p-3 rounded-2xl bg-[#0c1612]/95 border border-[#23352d] shadow-lg flex flex-wrap items-center justify-center gap-2 text-[12px] max-w-[500px]">
-            <button
-              type="button"
-              onClick={handleToggleUsdc}
-              className={`px-2.5 py-1 rounded-lg border transition-colors cursor-pointer ${
-                channel.usdcBalance > 0
-                  ? "bg-[#16efaa]/20 text-[#16efaa] border-[#16efaa]/40"
-                  : "bg-[#14231d] text-[#8ea096] border-[#23352d]"
-              }`}
-            >
-              USDC:{" "}
-              {channel.usdcBalance > 0 ? "250 USDC (Shown)" : "0 USDC (Hidden)"}
-            </button>
-
-            <button
-              type="button"
-              onClick={handleToggleState}
-              className={`px-2.5 py-1 rounded-lg border transition-colors cursor-pointer ${
-                channel.state === "active"
-                  ? "bg-[#16efaa]/20 text-[#16efaa] border-[#16efaa]/40"
-                  : "bg-[#ffc12c]/20 text-[#ffc12c] border-[#ffc12c]/40"
-              }`}
-            >
-              Channel:{" "}
-              {channel.state === "active" ? "Active" : "Closed / Unfunded"}
-            </button>
-
-            <button
-              type="button"
-              onClick={handleResetDefault}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#14231d] text-[#8ea096] hover:text-white border border-[#23352d] transition-colors cursor-pointer"
-              title="Reset to default initial state"
-            >
-              <RotateCcw size={12} />
-              <span>Reset</span>
-            </button>
-          </div>
-        )}
-      </div>
 
       {/* Modals */}
       <AddFundsModal

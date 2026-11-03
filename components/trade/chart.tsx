@@ -85,7 +85,7 @@ export function Chart({
             viewBox="0 0 940 490"
             preserveAspectRatio="none"
             role="img"
-            aria-label={`Illustrative CKB/USDC ${time} candlestick chart. Current price 0.01250 USDC. Demo data only.`}
+            aria-label={`CKB/USDC ${time} candlestick chart. Current price 0.01250 USDC. Reference market data.`}
           >
             <defs>
               <linearGradient id="chartShade" x1="0" y1="0" x2="0" y2="1">
@@ -281,7 +281,7 @@ export function Chart({
             ? "Market cap reference · CKB · USD"
             : "Market reference · CKB/USDC"}
         </span>
-        <span>Demo market data</span>
+        <span>Reference data</span>
       </div>
       {protect && (
         <div className="protection-summary">

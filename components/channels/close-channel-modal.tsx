@@ -162,7 +162,10 @@ export function CloseChannelModal({
               </div>
 
               {/* Checkbox confirmation */}
-              <label htmlFor="close-channel-confirm-checkbox" className="flex items-start gap-2.5 cursor-pointer text-[13px] text-[#8ea096] select-none">
+              <label
+                htmlFor="close-channel-confirm-checkbox"
+                className="flex items-start gap-2.5 cursor-pointer text-[13px] text-[#8ea096] select-none"
+              >
                 <input
                   id="close-channel-confirm-checkbox"
                   type="checkbox"
@@ -175,22 +178,6 @@ export function CloseChannelModal({
                   funds back to CKB L1.
                 </span>
               </label>
-
-              {/* Failure Simulation Toggle */}
-              <div className="flex items-center justify-between p-2 rounded-xl bg-[#0c1612]/60 border border-[#23352d]/60 text-[12px]">
-                <span className="text-[#8ea096]">Simulate failure state:</span>
-                <button
-                  type="button"
-                  onClick={() => setSimulateFailure(!simulateFailure)}
-                  className={`px-2 py-0.5 rounded text-[11px] font-semibold cursor-pointer border transition-colors ${
-                    simulateFailure
-                      ? "bg-[#ff505a]/20 text-[#ff505a] border-[#ff505a]/40"
-                      : "bg-transparent text-[#8ea096] border-[#23352d]"
-                  }`}
-                >
-                  {simulateFailure ? "Failure ON" : "Off (Normal)"}
-                </button>
-              </div>
 
               {/* Actions */}
               <div className="flex items-center gap-3 mt-1">
@@ -368,8 +355,8 @@ export function CloseChannelModal({
                   Cooperative close timed out
                 </h4>
                 <p className="text-[13px] text-[#8ea096]">
-                  Simulated signature exchange failure with the LP Node. Your
-                  channel and funds remain secure in Fiber.
+                  The channel could not be closed. Your channel and funds remain
+                  secure in Fiber.
                 </p>
               </div>
 

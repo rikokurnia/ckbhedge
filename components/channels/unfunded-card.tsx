@@ -60,8 +60,7 @@ export function UnfundedCard({
           </h3>
           <p className="text-[14px] text-[#8ea096] max-w-[360px] leading-relaxed">
             All your funds are currently settled on CKB Layer 1. Open a Fiber
-            channel with your testnet CKB to enable sub-second swaps with 0 gas
-            fee.
+            channel with CKB to enable sub-second swaps with 0 gas fee.
           </p>
 
           <div className="mt-4 px-3.5 py-2 rounded-xl bg-[#111c17] border border-[#23352d] text-[13px] text-[#a0b0a8]">
@@ -105,7 +104,7 @@ export function UnfundedCard({
           onClick={onOpenFaucet}
           className="inline-flex items-center gap-1 text-[14px] font-medium text-[#16efaa] hover:underline cursor-pointer bg-transparent border-0"
         >
-          <span>Get testnet CKB</span>
+          <span>Funding options</span>
           <ArrowUpRight size={15} />
         </button>
       </div>

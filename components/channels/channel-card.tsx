@@ -197,7 +197,7 @@ export function ChannelCard({
           onClick={onOpenFaucet}
           className="inline-flex items-center gap-1 text-[14px] font-medium text-[#16efaa] hover:underline cursor-pointer bg-transparent border-0"
         >
-          <span>Get testnet CKB</span>
+          <span>Funding options</span>
           <ArrowUpRight size={15} />
         </button>
       </div>

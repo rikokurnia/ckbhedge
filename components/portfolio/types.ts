@@ -80,7 +80,7 @@ export const INITIAL_ACTIVITY_LIST: ActivityEvent[] = [
       description:
         "Off-chain instant swap executed via Fiber Network multi-asset payment channel.",
       rows: [
-        { label: "Network", value: "Fiber Network Testnet" },
+        { label: "Network", value: "Fiber Network" },
         { label: "Channel ID", value: "0x3a4b91f0...789abcde", isMono: true },
         { label: "Type", value: "Instant Multi-Asset HTLC Swap" },
         { label: "Sold", value: "10,000 CKB" },
@@ -110,7 +110,7 @@ export const INITIAL_ACTIVITY_LIST: ActivityEvent[] = [
           value: "AI Downside Protection (Floor: $0.01150)",
         },
         { label: "Protected Amount", value: "25,000 CKB (50% of channel)" },
-        { label: "Target Asset", value: "USDC (RUSD Testnet)" },
+        { label: "Target Asset", value: "USDC" },
         {
           label: "Delegation Type",
           value: "Ephemeral Session Key (Browser AES)",
@@ -134,7 +134,7 @@ export const INITIAL_ACTIVITY_LIST: ActivityEvent[] = [
     details: {
       title: "Layer 1 Channel Funding Cell",
       description:
-        "2-of-2 multisig funding transaction confirmed on CKB Layer 1 (Pudge Testnet).",
+        "2-of-2 multisig funding transaction confirmed on CKB Layer 1.",
       rows: [
         {
           label: "Transaction Type",

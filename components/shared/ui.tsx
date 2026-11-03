@@ -121,7 +121,7 @@ export function Dialog({
         >
           <DialogPrimitive.Title>{title}</DialogPrimitive.Title>
           <DialogPrimitive.Description className="muted">
-            Demo only · no signing or funds movement.
+            Review the details below.
           </DialogPrimitive.Description>
           <DialogPrimitive.Close
             className="dialog-close"

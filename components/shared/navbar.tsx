@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Settings, ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { Badge, Button, Dialog } from "./ui";
+import { Button, Dialog } from "./ui";
 export function Navbar() {
   const pathname = usePathname();
   const [dialog, setDialog] = useState("");
@@ -27,27 +27,23 @@ export function Navbar() {
           ))}
         </nav>
         <div className="nav-actions">
-          <Badge>
-            <i />
-            Testnet
-          </Badge>
           <Button
             variant="ghost"
             aria-label="Settings"
-            onClick={() => setDialog("Demo settings")}
+            onClick={() => setDialog("Settings")}
           >
             <Settings size={22} />
           </Button>
-          <Button variant="secondary" onClick={() => setDialog("Demo wallet")}>
-            JoyID · ckt1…8f2a <ChevronDown size={16} />
+          <Button variant="secondary" onClick={() => setDialog("Wallet")}>
+            Wallet <ChevronDown size={16} />
           </Button>
         </div>
       </header>
       <Dialog open={!!dialog} title={dialog} onClose={() => setDialog("")}>
         <p>
-          {dialog.includes("wallet")
-            ? "You are exploring a simulated JoyID wallet. No wallet is connected."
-            : "CKB Testnet preview. All balances, quotes, channels, and authorizations are simulated. USDC integration is unverified."}
+          {dialog === "Wallet"
+            ? "Wallet connection is not available yet."
+            : "Display currency: USD · Default slippage: 0.5% · Network: Fiber"}
         </p>
         <Button onClick={() => setDialog("")}>Got it</Button>
       </Dialog>

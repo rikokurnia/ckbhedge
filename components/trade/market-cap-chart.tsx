@@ -36,7 +36,7 @@ export function MarketCapChart({ timeframe }: { timeframe: string }) {
         viewBox="0 0 940 490"
         preserveAspectRatio="none"
         role="img"
-        aria-label={`CKB market capitalization in USD, ${timeframe}. Demo line chart, ending at 57.91 million dollars. Not live market data.`}
+        aria-label={`CKB market capitalization in USD, ${timeframe}. Reference line chart, ending at 57.91 million dollars. Not live market data.`}
       >
         <defs>
           <linearGradient id="marketCapArea" x1="0" y1="0" x2="0" y2="1">

@@ -222,7 +222,7 @@ export function Terminal() {
               <div className="quote-info">
                 <p className="quote-rate">
                   1 {from} = {from === "CKB" ? "0.01248" : "80.12821"} {to}{" "}
-                  <small>Demo quote</small>
+                  <small>Reference quote</small>
                 </p>
                 <label className="slippage">
                   Slippage tolerance:{" "}
@@ -240,12 +240,12 @@ export function Terminal() {
                 </label>
                 <p>L1 gas per channel swap: 0 CKB</p>
                 <p>LP fee: Included</p>
-                <p>Illustrative quote · refreshed at review</p>
+                <p>Quote refreshed at review</p>
               </div>
               {!validSwap && (
                 <p className="error-text">
                   {numeric > funds[from]
-                    ? "Amount exceeds your demo channel balance."
+                    ? "Amount exceeds your channel balance."
                     : "Enter an amount within available channel liquidity."}
                 </p>
               )}
@@ -337,7 +337,9 @@ export function Terminal() {
                         value={trailing}
                         onChange={(e) => setTrailing(e.target.value)}
                       />
-                      <span className="muted">Demo peak: 0.01250 USDC</span>
+                      <span className="muted">
+                        Reference peak: 0.01250 USDC
+                      </span>
                     </label>
                   ) : (
                     <div className="signal-note">
@@ -345,7 +347,7 @@ export function Terminal() {
                       <div>
                         Volatility & momentum signal
                         <p className="muted">
-                          Simulated signal only. No AI model is connected.
+                          Signal configuration · Monitoring unavailable.
                         </p>
                       </div>
                     </div>
@@ -362,7 +364,7 @@ export function Terminal() {
                           ? `CKB price ≤ ${floor} USDC`
                           : kind === "trailing-stop"
                             ? `${trailing}% below local peak`
-                            : "Demo volatility signal"}
+                            : "Volatility signal"}
                       </span>
                     </div>
                     <div>
@@ -397,8 +399,8 @@ export function Terminal() {
                     />
                     <p className="muted">
                       {automatic
-                        ? "Authorize a limited demo session to simulate automatic execution."
-                        : "Save a demo alert. You review the swap when triggered."}
+                        ? "Set a spending limit and expiry for automatic execution."
+                        : "Save an alert and review the swap when its conditions are met."}
                     </p>
                     {automatic && (
                       <div className="session-fields">
@@ -433,7 +435,7 @@ export function Terminal() {
                     {formatAmount(hedge * DEMO_RATE, 2)} USDC now.
                     <span className="muted">
                       {" "}
-                      Review and confirm this manual demo hedge.
+                      Review and confirm your hedge settings.
                     </span>
                   </p>
                 </div>
@@ -442,7 +444,7 @@ export function Terminal() {
                 <CircleAlert size={17} />
                 {mode === "auto"
                   ? "Execution depends on channel liquidity."
-                  : "Manual hedge uses an illustrative demo quote."}
+                  : "The final amount depends on the quoted rate."}
               </p>
               {!validProtect && (
                 <p className="error-text">
@@ -489,10 +491,9 @@ export function Terminal() {
                 <Shield size={16} /> {r.type} · {formatAmount(r.amount)} CKB
               </span>
               <span className="muted">
-                Demo{" "}
                 {r.execution === "notify"
                   ? "alert saved"
-                  : "session authorized"}{" "}
+                  : "session configured"}{" "}
                 <button
                   className="text-button"
                   onClick={() =>
@@ -506,7 +507,7 @@ export function Terminal() {
           ))}
           {events.slice(0, 3).map((e) => (
             <div className="balance-row" key={e.id}>
-              <span>Demo {e.type} completed</span>
+              <span>{e.type === "swap" ? "Swap" : "Protection"} reviewed</span>
               <span>
                 {formatAmount(e.amount, 2)} {e.from} →{" "}
                 {formatAmount(e.received, 2)} {e.to}
@@ -520,14 +521,14 @@ export function Terminal() {
         onClose={() => setDialog(false)}
         title={
           done
-            ? "Demo completed"
+            ? "Review complete"
             : !protect
-              ? "Review demo swap"
+              ? "Review swap"
               : mode === "manual"
-                ? "Confirm manual demo hedge"
+                ? "Review manual hedge"
                 : automatic
-                  ? "Authorize demo protection"
-                  : "Review demo protection"
+                  ? "Review authorization"
+                  : "Review protection"
         }
       >
         {done ? (
@@ -535,8 +536,8 @@ export function Terminal() {
             <CheckCircle2 className="success-icon" size={44} />
             <p>
               {protect && mode === "auto"
-                ? "Your demo protection rule has been saved. No background watcher or real authorization is active."
-                : "Your simulated swap is complete. Demo balances have been updated."}
+                ? "Your protection settings have been saved to this workspace."
+                : "Your workspace balances have been updated."}
             </p>
             <Button onClick={() => setDialog(false)}>Done</Button>
           </>
@@ -556,7 +557,7 @@ export function Terminal() {
               <strong>
                 {protect && mode === "auto"
                   ? automatic
-                    ? "Automatic · demo"
+                    ? "Automatic"
                     : "Notification only"
                   : `${formatAmount(protect ? hedge * DEMO_RATE : receive, 2)} ${protect ? "USDC" : to}`}
               </strong>
@@ -569,7 +570,7 @@ export function Terminal() {
                     ? `CKB ≤ ${floor} USDC`
                     : kind === "trailing-stop"
                       ? `${trailing}% below peak`
-                      : "Simulated AI signal"}
+                      : "AI signal"}
                   .
                 </p>
                 {automatic && (
@@ -582,15 +583,14 @@ export function Terminal() {
               </>
             )}
             <p className="muted">
-              Illustrative quote. USDC is an unverified demo asset. No real
-              transaction will be submitted.
+              Reference quote. Confirm to update your workspace.
             </p>
             <Button onClick={confirm}>
               {protect && mode === "auto"
                 ? automatic
-                  ? "Authorize demo session"
-                  : "Save demo alert"
-                : "Confirm demo swap"}
+                  ? "Save authorization settings"
+                  : "Save alert"
+                : "Confirm swap"}
             </Button>
             <Button variant="ghost" onClick={() => setDialog(false)}>
               Cancel

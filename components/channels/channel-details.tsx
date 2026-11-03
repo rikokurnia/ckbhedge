@@ -37,7 +37,7 @@ export function ChannelDetails({ channel }: ChannelDetailsProps) {
           Channel ID
         </span>
         <div className="flex items-center gap-1.5 font-mono text-[12px] text-white">
-          <span>{channel.id}</span>
+          <span>{channel.id.replace(/^demo-/, "")}</span>
           <button
             type="button"
             onClick={() => handleCopy("id", channel.channelIdHex)}
@@ -108,7 +108,7 @@ export function ChannelDetails({ channel }: ChannelDetailsProps) {
 
       <div className="flex items-center justify-between py-1">
         <span className="text-[#c6d6ce]">Network</span>
-        <span className="text-white">Nervos Fiber Testnet (Pudge)</span>
+        <span className="text-white">Nervos Fiber</span>
       </div>
     </div>
   );

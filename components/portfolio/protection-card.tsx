@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { Shield, ArrowUpRight } from 'lucide-react';
-import styles from './portfolio.module.css';
-import { type ActiveProtectionData } from './types';
-import { formatAmount } from '@/lib/demo';
-import { Dialog, Button } from '@/components/shared/ui';
+import { useState } from "react";
+import Link from "next/link";
+import { Shield, ArrowUpRight } from "lucide-react";
+import styles from "./portfolio.module.css";
+import { type ActiveProtectionData } from "./types";
+import { formatAmount } from "@/lib/demo";
+import { Dialog, Button } from "@/components/shared/ui";
 
 interface ProtectionCardProps {
   protection: ActiveProtectionData | null;
@@ -17,18 +17,50 @@ interface ProtectionCardProps {
 
 function AmberShieldIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M12 2L4 5V11.09C4 16.14 7.41 20.85 12 22C16.59 20.85 20 16.14 20 11.09V5L12 2Z" fill="#ffc12c" />
-      <path d="M9 12L11 14L15.5 9.5" stroke="#07100d" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M12 2L4 5V11.09C4 16.14 7.41 20.85 12 22C16.59 20.85 20 16.14 20 11.09V5L12 2Z"
+        fill="#ffc12c"
+      />
+      <path
+        d="M9 12L11 14L15.5 9.5"
+        stroke="#07100d"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
 
 function PausedShieldIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M12 2L4 5V11.09C4 16.14 7.41 20.85 12 22C16.59 20.85 20 16.14 20 11.09V5L12 2Z" fill="#889891" />
-      <path d="M10 9V15M14 9V15" stroke="#07100d" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M12 2L4 5V11.09C4 16.14 7.41 20.85 12 22C16.59 20.85 20 16.14 20 11.09V5L12 2Z"
+        fill="#889891"
+      />
+      <path
+        d="M10 9V15M14 9V15"
+        stroke="#07100d"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -41,7 +73,7 @@ export function ProtectionCard({
 }: ProtectionCardProps) {
   const [showRevokeDialog, setShowRevokeDialog] = useState(false);
 
-  const isPaused = protection?.status === 'paused';
+  const isPaused = protection?.status === "paused";
 
   return (
     <>
@@ -55,8 +87,12 @@ export function ProtectionCard({
                 <span className={styles.shieldIconWrap}>
                   {isPaused ? <PausedShieldIcon /> : <AmberShieldIcon />}
                 </span>
-                <span className={isPaused ? styles.pausedBadge : styles.monitoringBadge}>
-                  {isPaused ? 'Paused' : 'Monitoring'}
+                <span
+                  className={
+                    isPaused ? styles.pausedBadge : styles.monitoringBadge
+                  }
+                >
+                  {isPaused ? "Paused" : "Monitoring"}
                 </span>
               </>
             )}
@@ -65,22 +101,33 @@ export function ProtectionCard({
 
         {!protection ? (
           <div className={styles.emptyStateContainer}>
-            <Shield size={36} style={{ color: '#b1bdc6', opacity: 0.7 }} />
+            <Shield size={36} style={{ color: "#b1bdc6", opacity: 0.7 }} />
             <p className={styles.emptyStateTitle}>No active protection</p>
             <p className={styles.emptyStateText}>
-              Set up automated downside protection on your CKB holdings to avoid market drops without paying L1 gas or waiting for mempool confirmation.
+              Set up automated downside protection on your CKB holdings to avoid
+              market drops without paying L1 gas or waiting for mempool
+              confirmation.
             </p>
-            <div style={{ display: 'flex', gap: 12, marginTop: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
+            <div
+              style={{
+                display: "flex",
+                gap: 12,
+                marginTop: 12,
+                flexWrap: "wrap",
+                justifyContent: "center",
+              }}
+            >
               <Link href="/trade?mode=protect" className={styles.manageBtn}>
-                Set up protection <ArrowUpRight size={18} style={{ marginLeft: 6 }} />
+                Set up protection{" "}
+                <ArrowUpRight size={18} style={{ marginLeft: 6 }} />
               </Link>
               <button
                 type="button"
                 onClick={onRestore}
                 className={styles.pauseBtn}
-                style={{ padding: '8px 16px', fontSize: 14 }}
+                style={{ padding: "8px 16px", fontSize: 14 }}
               >
-                Restore demo rule
+                Restore rule
               </button>
             </div>
           </div>
@@ -98,17 +145,25 @@ export function ProtectionCard({
 
             <div className={styles.detailRow}>
               <span className={styles.detailLabel}>Amount</span>
-              <span className={styles.detailValue}>{formatAmount(protection.amountCkb)} CKB</span>
+              <span className={styles.detailValue}>
+                {formatAmount(protection.amountCkb)} CKB
+              </span>
             </div>
 
             <div className={styles.detailRow}>
               <span className={styles.detailLabel}>Safety floor</span>
-              <span className={styles.detailValue}>{protection.safetyFloorUsdc.toFixed(5)} USDC</span>
+              <span className={styles.detailValue}>
+                {protection.safetyFloorUsdc.toFixed(5)} USDC
+              </span>
             </div>
 
             <div className={styles.detailRow}>
-              <span className={styles.detailLabel}>Authorization remaining</span>
-              <span className={styles.detailValue}>{protection.authRemainingText}</span>
+              <span className={styles.detailLabel}>
+                Authorization remaining
+              </span>
+              <span className={styles.detailValue}>
+                {protection.authRemainingText}
+              </span>
             </div>
 
             <div className={styles.protectionActions}>
@@ -124,9 +179,11 @@ export function ProtectionCard({
                 type="button"
                 className={styles.pauseBtn}
                 onClick={onTogglePause}
-                aria-label={isPaused ? 'Resume protection rule' : 'Pause protection rule'}
+                aria-label={
+                  isPaused ? "Resume protection rule" : "Pause protection rule"
+                }
               >
-                {isPaused ? 'Resume' : 'Pause'}
+                {isPaused ? "Resume" : "Pause"}
               </button>
             </div>
 
@@ -148,11 +205,16 @@ export function ProtectionCard({
         title="Revoke protection authorization?"
       >
         <p className={styles.dialogDescription}>
-          This will immediately revoke the delegated JoyID session key in your browser. The automated downside protection rule for <strong>25,000 CKB</strong> will be cancelled, and no swap will execute if CKB drops below the $0.01150 safety floor.
+          This will immediately revoke the delegated JoyID session key in your
+          browser. The automated downside protection rule for{" "}
+          <strong>25,000 CKB</strong> will be cancelled, and no swap will
+          execute if CKB drops below the $0.01150 safety floor.
         </p>
         <div className={styles.dialogRow}>
           <span className={styles.dialogRowLabel}>Active rule</span>
-          <span className={styles.dialogRowValue}>AI downside protection (CKB → USDC)</span>
+          <span className={styles.dialogRowValue}>
+            AI downside protection (CKB → USDC)
+          </span>
         </div>
         <div className={styles.dialogRow}>
           <span className={styles.dialogRowLabel}>Protected amount</span>
@@ -172,7 +234,7 @@ export function ProtectionCard({
             Keep active
           </Button>
           <Button
-            style={{ flex: 1, background: '#ff505a', color: '#fff' }}
+            style={{ flex: 1, background: "#ff505a", color: "#fff" }}
             onClick={() => {
               onRevoke();
               setShowRevokeDialog(false);
